@@ -22,6 +22,7 @@ class Course(models.Model):
         help_text='Введите описание курса.'
     )
 
+
 class Lesson(models.Model):
     title = models.CharField(
         max_length=50,
