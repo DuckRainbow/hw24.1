@@ -46,8 +46,6 @@ class Lesson(models.Model):
     )
     video_link = models.URLField(
         verbose_name='Ссылка на видео',
-        blank=True,
-        null=True,
     )
     course = models.ForeignKey(
         Course,
