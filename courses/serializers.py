@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
-from courses.models import Lesson
+from courses.models import Lesson, Course
 
 
-class LessonSerializer(serializers.ModelSerializer):
+class CourseSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Lesson
-        fields = ['title', 'description', 'preview', 'video_link', 'course']
+        model = Course
+        fields = ['title', 'preview', 'description']
