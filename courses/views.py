@@ -1,8 +1,9 @@
-from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
-from rest_framework import generics
+
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
+
 from courses.models import Lesson, Course
-from courses.serializers import CourseSerializer
+from courses.serializers import CourseSerializer, LessonSerializer
 
 
 class CourseViewSet(ModelViewSet):
@@ -10,7 +11,26 @@ class CourseViewSet(ModelViewSet):
     serializer_class = CourseSerializer
 
 
-class LessonList(generics.ListCreateAPIView):
-    pass
-    # queryset = Lesson.objects.all()
-    # serializer_class = LessonSerializer
+class LessonCreateApiView(CreateAPIView):
+    queryset = Lesson.objects.all()
+    serializer_class = LessonSerializer
+
+
+class LessonListApiView(ListAPIView):
+    queryset = Lesson.objects.all()
+    serializer_class = LessonSerializer
+
+
+class LessonRetrieveAPIView(RetrieveAPIView):
+    queryset = Lesson.objects.all()
+    serializer_class = LessonSerializer
+
+
+class LessonUpdateApiView(UpdateAPIView):
+    queryset = Lesson.objects.all()
+    serializer_class = LessonSerializer
+
+
+class LessonDestroyApiView(DestroyAPIView):
+    queryset = Lesson.objects.all()
+    serializer_class = LessonSerializer
