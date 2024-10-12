@@ -12,7 +12,6 @@ class User(AbstractUser):
         null=True,
     )
     phone_num = models.IntegerField(
-        max_length=11,
         verbose_name='Phone',
         blank=True
     )
