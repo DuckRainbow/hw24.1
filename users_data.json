@@ -1,30 +1,46 @@
 [
   {
-    "user": 1,
-    "date_of": "16.10.2024",
-    "paid_lesson": 1,
-    "summ_of": 500,
-    "payment_method": "Cash"
+    "model": "users.payment",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "date_of": "16.10.2024",
+      "paid_lesson": 1,
+      "summ_of": 500,
+      "payment_method": "Cash"
+    }
   },
   {
-    "user": 1,
-    "date_of": "14.10.2024",
-    "paid_lesson": 3,
-    "summ_of": 700,
-    "payment_method": "Card"
+    "model": "users.payment",
+    "pk": 2,
+    "fields": {
+      "user": 1,
+      "date_of": "14.10.2024",
+      "paid_lesson": 3,
+      "summ_of": 700,
+      "payment_method": "Card"
+    }
   },
   {
-    "user": 1,
-    "date_of": "11.10.2024",
-    "paid_course": 3,
-    "summ_of": 1300,
-    "payment_method": "Cash"
+    "model": "users.payment",
+    "pk": 3,
+    "fields": {
+      "user": 1,
+      "date_of": "11.10.2024",
+      "paid_course": 3,
+      "summ_of": 1300,
+      "payment_method": "Cash"
+    }
   },
   {
-    "user": 1,
-    "date_of": "09.10.2024",
-    "paid_course": 2,
-    "summ_of": 900,
-    "payment_method": "Card"
+    "model": "users.payment",
+    "pk": 4,
+    "fields": {
+      "user": 1,
+      "date_of": "09.10.2024",
+      "paid_course": 2,
+      "summ_of": 900,
+      "payment_method": "Card"
+    }
   }
 ]

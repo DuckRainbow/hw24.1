@@ -10,10 +10,10 @@ app_name = UsersConfig.name
 router = DefaultRouter()
 
 urlpatterns = [
-    path('users/create/', UserCreateAPIView.as_view(), name='user_create'),
-    path('users/', UserListAPIView.as_view(), name='user_list'),
-    path('users/update/<int:pk>/', UserUpdateAPIView.as_view(), name='user_update'),
-    path('users/<int:pk>/', UserRetrieveAPIView.as_view(), name='user_retrieve'),
-    path('users/delete/<int:pk>', UserDestroyAPIView.as_view(), name='user_delete'),
-    path('users/payments/', PaymentListAPIView.as_view(), name='payment_list'),
+    path('create/', UserCreateAPIView.as_view(), name='user_create'),
+    path('', UserListAPIView.as_view(), name='user_list'),
+    path('update/<int:pk>/', UserUpdateAPIView.as_view(), name='user_update'),
+    path('<int:pk>/', UserRetrieveAPIView.as_view(), name='user_retrieve'),
+    path('delete/<int:pk>', UserDestroyAPIView.as_view(), name='user_delete'),
+    path('payments/', PaymentListAPIView.as_view(), name='payment_list'),
 ]
