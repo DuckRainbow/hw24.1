@@ -36,6 +36,7 @@ class User(AbstractUser):
     def __str__(self):
         return self.email
 
+
 class Payments(Model):
     user = models.ForeignKey(
         User,
@@ -74,5 +75,3 @@ class Payments(Model):
         blank=True,
         null=True
     )
-
-
