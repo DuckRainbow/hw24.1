@@ -37,7 +37,7 @@ class User(AbstractUser):
         return self.email
 
 
-class Payments(Model):
+class Payment(Model):
     user = models.ForeignKey(
         User,
         verbose_name='пользователь',
