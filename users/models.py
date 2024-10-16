@@ -44,7 +44,7 @@ class Payments(Model):
         null=True,
         on_delete=models.SET_NULL,
     )
-    date_ = models.DateTimeField(
+    date_of = models.DateTimeField(
         verbose_name="Дата оплаты",
         blank=True,
         null=True
@@ -63,7 +63,7 @@ class Payments(Model):
         null=True,
         on_delete=models.SET_NULL,
     )
-    summ_ = models.IntegerField(
+    summ_of = models.IntegerField(
         verbose_name='сумма оплаты',
         blank=True,
         null=True
