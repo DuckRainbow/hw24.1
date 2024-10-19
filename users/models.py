@@ -7,7 +7,10 @@ from courses.models import Course, Lesson
 
 class User(AbstractUser):
     username = None
-    email = models.EmailField(unique=True, verbose_name='Email')
+    email = models.EmailField(
+        unique=True,
+        verbose_name='Email'
+    )
     token = models.CharField(
         max_length=100,
         verbose_name='Token',
@@ -16,7 +19,8 @@ class User(AbstractUser):
     )
     phone_num = models.IntegerField(
         verbose_name='Phone',
-        blank=True
+        blank=True,
+        null=True,
     )
     avatar = models.ImageField(
         verbose_name='Avatar',

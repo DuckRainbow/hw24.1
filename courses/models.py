@@ -1,5 +1,7 @@
 from django.db import models
 
+from config import settings
+
 
 class Course(models.Model):
     title = models.CharField(
@@ -20,6 +22,13 @@ class Course(models.Model):
         blank=True,
         null=True,
         help_text='Введите описание курса.'
+    )
+    creator = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name='Создатель',
     )
 
 
@@ -53,4 +62,11 @@ class Lesson(models.Model):
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
+    )
+    creator = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name='Создатель',
     )
