@@ -4,6 +4,12 @@ from rest_framework.serializers import ModelSerializer
 from courses.models import Course, Lesson
 
 
+class LessonListSerializer(ModelSerializer):
+    class Meta:
+        model = Lesson
+        fields = ['id', 'title', 'description']
+
+
 class LessonSerializer(ModelSerializer):
     class Meta:
         model = Lesson

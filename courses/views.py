@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
 from courses.models import Course, Lesson
-from courses.serializers import CourseSerializer, LessonSerializer, CourseDetailSerializer
+from courses.serializers import CourseSerializer, LessonSerializer, CourseDetailSerializer, LessonListSerializer
 from users.permissions import IsModerator, IsCreator
 
 
@@ -45,7 +45,7 @@ class LessonCreateAPIView(CreateAPIView):
 
 class LessonListAPIView(ListAPIView):
     queryset = Lesson.objects.all()
-    serializer_class = LessonSerializer
+    serializer_class = LessonListSerializer
 
 
 class LessonRetrieveAPIView(RetrieveAPIView):
