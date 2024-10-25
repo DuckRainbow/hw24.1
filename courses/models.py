@@ -70,3 +70,20 @@ class Lesson(models.Model):
         blank=True,
         verbose_name='Создатель',
     )
+
+
+class Subscription(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name='Пользователь',
+    )
+    course = models.ForeignKey(
+        Course,
+        verbose_name='Курс',
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+    )
