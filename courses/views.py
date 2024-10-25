@@ -97,15 +97,20 @@ class SubscriptionUpdateAPIView(UpdateAPIView):
     def post(self, *args, **kwargs):
         user = self.request.user
         course_id = self.request.data.get('course')
-        course_item = course_item = get_object_or_404(Course, pk=course_id)
+        course_item = get_object_or_404(Course, pk=course_id)
         subs_item = Subscription.objects.filter(user=user, course=course_item)
 
         # Если подписка у пользователя на этот курс есть - удаляем ее
         if subs_item.exists():
             subs_item.delete()
             message = "Подписка удалена"
-            # Если подписки у пользователя на этот курс нет - создаем ее
+        # Если подписки у пользователя на этот курс нет - создаем ее
         else:
             Subscription.objects.create(user=user, course=course_item)
             message = "Подписка добавлена"
         return Response({"message": message})
+
+
+class SubscriptionDestroyAPIView(DestroyAPIView):
+    queryset = Subscription.objects.all()
+    serializer_class = SubscriptionSerializer
