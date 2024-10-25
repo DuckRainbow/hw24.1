@@ -6,18 +6,25 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from courses.models import Course, Lesson, Subscription
+from courses.paginators import PagePagination
 from courses.serializers import CourseSerializer, LessonSerializer, CourseDetailSerializer, LessonListSerializer, \
     SubscriptionSerializer
 from users.permissions import IsModerator, IsCreator
 
 
 class CourseViewSet(ModelViewSet):
-    queryset = Course.objects.all()
+    pagination_class = PagePagination
 
     def get_serializer_class(self):
         if self.action == 'retrieve':
             return CourseDetailSerializer
         return CourseSerializer
+
+    def get(self, request):
+        queryset = Course.objects.all()
+        paginated_queryset = self.paginate_queryset(queryset)
+        serializer = self.get_serializer_class(paginated_queryset, many=True)
+        return self.get_paginated_response(serializer.data)
 
     def perform_create(self, serializer):
         course = serializer.save()
@@ -46,8 +53,13 @@ class LessonCreateAPIView(CreateAPIView):
 
 
 class LessonListAPIView(ListAPIView):
-    queryset = Lesson.objects.all()
-    serializer_class = LessonListSerializer
+    pagination_class = PagePagination
+
+    def get(self, request):
+        queryset = Lesson.objects.all()
+        paginated_queryset = self.paginate_queryset(queryset)
+        serializer = LessonListSerializer(paginated_queryset, many=True)
+        return self.get_paginated_response(serializer.data)
 
 
 class LessonRetrieveAPIView(RetrieveAPIView):
