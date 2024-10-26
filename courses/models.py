@@ -70,3 +70,29 @@ class Lesson(models.Model):
         blank=True,
         verbose_name='Создатель',
     )
+
+
+class Subscription(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name='Пользователь',
+    )
+    course = models.ForeignKey(
+        Course,
+        verbose_name='Курс',
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+    )
+
+    def __str__(self):
+        return f"Пользователь {self.user}, подписан на курс: {self.course}"
+
+    class Meta:
+        db_table = "subscription"
+        verbose_name = "Подписка"
+        verbose_name_plural = "Подиписки"
+        ordering = ("user",)
