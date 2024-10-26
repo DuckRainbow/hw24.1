@@ -10,7 +10,7 @@ class LessonsTestCase(APITestCase):
 
     def setUp(self):
         self.user = User.objects.create(email='admin@sky.pro')
-        self.course = Course.objects.create(title='Тестовый курс')
+        self.course = Course.objects.create(title='Тестовый курс 1')
         self.lesson = Lesson.objects.create(
             title='Тестовый урок',
             video_link='https://www.youtube.com/q',
