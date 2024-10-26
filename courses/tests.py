@@ -2,7 +2,7 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from courses.models import Course, Lesson
+from courses.models import Course, Lesson, Subscription
 from users.models import User
 
 
@@ -49,7 +49,7 @@ class LessonsTestCase(APITestCase):
         response = self.client.patch(url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(
-            Lesson.objects.get(pk=self.lesson.pk).name, 'Тестовый урок 3'
+            Lesson.objects.get(pk=self.lesson.pk).title, 'Тестовый урок 3'
         )
 
     def test_lesson_delete(self):
@@ -68,14 +68,24 @@ class SubscriptionsTestCase(APITestCase):
             title='Тестовая подписка',
         )
         self.client.force_authenticate(user=self.user)
-        self.url = reverse("courses:subscription_create")
+        self.url = reverse("courses:subscriptions_create")
 
-    def test_get(self):
-        # Тестирование GET-запроса к API
-        response = self.client.get(self.url)
+    def test_subscription_create(self):
+        data = {"user": self.user.pk, "course": self.course.pk}
+        response = self.client.post(self.url, data)
+        temp_data = response.json()
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(temp_data.get("message"), "Подписка добавлена")
+        self.assertEqual(Subscription.objects.all().count(), 1)
 
-    def test_post(self):
-        # Тестирование POST-запроса к API
-        response = self.client.post(self.url, self.data)
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+    def test_subscribe_delete(self):
+        Subscription.objects.create(user=self.user, course=self.course)
+        data = {
+            "user": self.user.id,
+            "course": self.course.id,
+        }
+        response = self.client.post(self.url, data=data)
+        temp_data = response.json()
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(temp_data.get("message"), "Подписка удалена")
+        self.assertEqual(Subscription.objects.all().count(), 0)

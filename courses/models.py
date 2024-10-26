@@ -87,3 +87,12 @@ class Subscription(models.Model):
         null=True,
         on_delete=models.SET_NULL,
     )
+
+    def __str__(self):
+        return f"Пользователь {self.user}, подписан на курс: {self.course}"
+
+    class Meta:
+        db_table = "subscription"
+        verbose_name = "Подписка"
+        verbose_name_plural = "Подиписки"
+        ordering = ("user",)
