@@ -42,6 +42,30 @@ class User(AbstractUser):
 
 
 class Payment(Model):
+    amount = models.PositiveIntegerField(
+        verbose_name='сумма оплаты',
+        blank=True,
+        null=True
+    )
+    session_id = models.CharField(
+        max_length=255,
+        verbose_name='Id сессии',
+        blank=True,
+        null=True,
+    )
+    link = models.URLField(
+        max_length=400,
+        verbose_name='Ссылка на оплату',
+        blank=True,
+        null=True,
+    )
+    payment_method = models.CharField(
+        max_length=255,
+        verbose_name='способ оплаты: наличные или перевод на счет.',
+        blank=True,
+        null=True,
+        help_text='Введите способ оплаты (наличные или перевод).'
+    )
     user = models.ForeignKey(
         User,
         verbose_name='пользователь',
@@ -68,14 +92,16 @@ class Payment(Model):
         null=True,
         on_delete=models.SET_NULL,
     )
-    summ_of = models.IntegerField(
-        verbose_name='сумма оплаты',
-        blank=True,
-        null=True
-    )
-    payment_method = models.CharField(
-        max_length=255,
-        verbose_name='способ оплаты: наличные или перевод на счет.',
-        blank=True,
-        null=True
-    )
+
+    class Meta:
+        verbose_name = 'Оплата'
+        verbose_name_plural = 'Оплаты'
+
+    def __str__(self):
+        if self.paid_course is None:
+            view = 'урок'
+            payment = self.paid_lesson
+        else:
+            view = 'курс'
+            payment = self.paid_course
+        return f'Пользователь {self.user} оплатил {self.amount} за {view} "{payment}" {self.date_of}'
