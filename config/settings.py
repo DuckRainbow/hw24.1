@@ -43,11 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-    'users',
-    'courses',
     'rest_framework_simplejwt',
     'drf_yasg',
+    'django_celery_beat',
 
+    'users',
+    'courses',
 ]
 
 MIDDLEWARE = [
@@ -181,3 +182,18 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 STRIPE_API_KEY = os.getenv('STRIPE_API_KEY')
+
+CELERY_TIMEZONE = TIME_ZONE
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+CELERY_BEAT_SCHEDULE = {
+    'block_users': {
+        'task': 'users.tasks.block_users',
+        'schedule': timedelta(days=1),
+    },
+}
