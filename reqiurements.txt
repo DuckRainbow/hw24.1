@@ -10,3 +10,4 @@ stripe
 celery
 eventlet
 redis
+django-celery-beat
