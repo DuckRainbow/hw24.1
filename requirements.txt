@@ -11,3 +11,4 @@ celery
 eventlet
 redis
 django-celery-beat
+drf-yasg
